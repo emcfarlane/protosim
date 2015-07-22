@@ -1,0 +1,39 @@
+package delta;
+
+message Message {
+	enum Type { ERROR = 1; START = 2; STOP = 3; PING = 4; POINT = 5; SET = 6; GET = 7; }
+
+	// Type Identifier
+	required Type type = 1;
+
+	optional string info = 2;
+	optional Point point = 3;
+	optional Motor motor = 5;
+}
+
+message Point {
+	required double x = 1;
+	required double y = 2;
+	required double z = 3;
+}
+
+message Motor {
+	required int32 id = 1;
+	optional int32 p = 2;
+	optional int32 i = 3;
+	optional int32 d = 4;
+	optional int32 position = 5;
+	optional int32 velocity = 6;
+	optional int32 torque = 7;
+	optional int32 punch = 8;
+}
+
+// ARM Compile Commands
+// protoc -omessage.pb message.proto
+// python ~/Downloads/nanopb/generator/nanopb_generator.py message.pb
+
+// protobuf-c
+// protoc-c --c_out=. message.proto
+
+// Go Compile Commands 
+// protoc --go_out=. *.proto
